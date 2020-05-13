@@ -1,5 +1,6 @@
 var router = require('express').Router();
-const User = require('./../db/models/User');
+const User = require('./../db/models/UserModel');
+const jwt = require('jsonwebtoken');
 
 //return an array of all the list of task
 router.get('/', async (req, res) => {
@@ -15,7 +16,9 @@ router.post('/register', async (req, res) => {
     if (error) {
       console.log(error);
     } else {
-      res.status(200).send(registeredUser);
+      let payload = { subject: registeredUser._id };
+      let token = jwt.sign(payload, 'secretKey');
+      res.status(200).send({ token });
     }
   });
 });
@@ -25,12 +28,19 @@ router.post('/login', async (req, res) => {
 
   try {
     user = await User.findOne({ email: userData.email });
+    console.log(user);
     if (!user) {
+      console.log('401');
       res.status(401).send('Invalid Email');
     } else if (user.password !== userData.password) {
+      console.log(401);
       res.status(401).send('Invalid password');
     } else {
-      res.status.send(user);
+      let payload = { subject: user._id };
+      let token = jwt.sign(payload, 'secretKey');
+      console.log('200');
+      console.log(token);
+      res.status(200).send({ token });
     }
   } catch (e) {
     console.log(e);
