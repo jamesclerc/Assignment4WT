@@ -10,9 +10,21 @@ import { Task } from './models/task.model';
 export class TasklistService {
   constructor(private webRequestService: WebRequestService) {}
 
-  createTask(title: string, desc: string, userId: string, date: string) {
+  createTask(
+    title: string,
+    desc: string,
+    userId: string,
+    priority: string,
+    date: string
+  ) {
     console.log(date);
-    return this.webRequestService.post(`tasks`, { title, userId, desc, date });
+    return this.webRequestService.post(`tasks`, {
+      title,
+      userId,
+      desc,
+      date,
+      priority,
+    });
   }
 
   getTasks(userId: string) {

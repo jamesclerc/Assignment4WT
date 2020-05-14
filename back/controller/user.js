@@ -1,6 +1,26 @@
 var router = require('express').Router();
 const User = require('./../db/models/UserModel');
 const jwt = require('jsonwebtoken');
+const Task = require('./../db/models/TaskModel');
+const moment = require('moment');
+const nodemailer = require('nodemailer');
+
+let testAccount;
+let transporter;
+nodemailer.createTestAccount((err, testaccount) => {
+  testAccount = testaccount;
+  transporter = nodemailer.createTransport({
+    host: 'smtp.ethereal.email',
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: testAccount.user, // generated ethereal user
+      pass: testAccount.pass, // generated ethereal password
+    },
+  });
+});
+
+// create reusable transporter object using the default SMTP transport
 
 function verifyToken(req, res) {
   if (!req.headers || !req.headers.authorization) {
@@ -45,6 +65,39 @@ router.get('/:id', async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     res.send(user);
+  } catch (err) {
+    res.status.send('Unauthorized request');
+  }
+});
+
+router.get('/notify', async (req, res) => {
+  isVerified = verifyToken(req, res);
+  if (!isVerified) return;
+  try {
+    const user = await User.findById(req.userId);
+
+    const today = moment().startOf('day');
+
+    let tasks = await Task.find({
+      userId: user.id,
+      completed: false,
+      completeBefore: {
+        $gte: today.toDate(),
+        $lte: moment(today).endOf('day').toDate(),
+      },
+    });
+    let text = 'Theses tasks are for today : ';
+    for (const task in tasks) {
+      text += `${task.title}\n`;
+    }
+    text += `check it on http://localhost:4200/`;
+    let info = await transporter.sendMail({
+      from: '"Ass4 James & Kévin" <Ass4@example.com>', // sender address
+      to: user.email, // list of receivers
+      subject: 'Hello You got somes tasks pending for today', // Subject line
+      text, // plain text body
+    });
+    res.send({ message: 'notified' });
   } catch (err) {
     res.status.send('Unauthorized request');
   }

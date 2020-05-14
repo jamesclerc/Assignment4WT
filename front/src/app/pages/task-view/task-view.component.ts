@@ -39,9 +39,22 @@ export class TaskViewComponent implements OnInit {
     });
   }
 
-  test(date: string){
-    let x = new Date(date.substring(0,10)).getTime()
+  test(date: string) {
+    let x = new Date(date.substring(0, 10)).getTime();
     let datenow = new Date().getTime();
-    return ("day left " + Math.round(Math.abs((datenow - x) / 86400000)));
+    return 'day left ' + Math.round(Math.abs((datenow - x) / 86400000));
+  }
+
+  getIconColor(task: Task) {
+    let priorities = [
+      { id: '1', color: 'green' },
+      { id: '2', color: 'orange' },
+      { id: '3', color: 'red' },
+      { id: 'false', color: 'green' },
+    ];
+    for (let i = 0; i < 3; i++) {
+      if (priorities[i].id == task.priority) return priorities[i].color;
+    }
+    return 'green';
   }
 }

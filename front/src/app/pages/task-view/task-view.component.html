@@ -10,6 +10,12 @@
         (click)="onTaskCliked(task)"
         [ngClass]="{ completed: task.completed }"
       >
+        <div class="icon">
+          <i
+            class="fas fa-exclamation-triangle"
+            [ngStyle]="{ color: getIconColor(task) }"
+          ></i>
+        </div>
         <div class="task-text">
           <div class="task-title">
             <p>{{ task.title }}</p>
