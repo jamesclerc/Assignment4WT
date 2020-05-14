@@ -1,22 +1,35 @@
 <div class="centered-content">
-    <div class="task-manager-container">
-
-        <div class="sidebar has-background-white">
-        </div>
-        <div class="task-list-container has-background-light">
-            <h1 class="title has-text-primary">
-                Tasks
-            </h1>
-            <div class="task-list-container-task" >
-                <div class="task" (click)="onTaskCliked(task)" *ngFor="let task of tasks" [ngClass]="{'completed': task.completed }">
-                    <div class="task-text">
-                        <p>{{task.title}}</p>
-                    </div>
-                </div>
+  <div class="task-manager-container">
+    <div class="sidebar has-background-white"></div>
+    <div class="task-list-container has-background-light">
+      <h1 class="title has-text-primary">
+        Tasks
+      </h1>
+      <div class="task-list-container-task">
+        <div *ngFor="let task of tasks">
+          <div
+            class="task"
+            (click)="onTaskCliked(task)"
+            [ngClass]="{ completed: task.completed }"
+          >
+            <div class="task-text">
+              <p>{{ task.title }}</p>
             </div>
-            <button routerLink="./newtask" class="circle-add-button button is-primary">
-                +
+          </div>
+
+          <div>
+            <button class="button" (click)="onButtonDeleteClicked(task)">
+              Delete
             </button>
+          </div>
         </div>
+      </div>
+      <button
+        routerLink="./newtask"
+        class="circle-add-button button is-primary"
+      >
+        +
+      </button>
     </div>
+  </div>
 </div>

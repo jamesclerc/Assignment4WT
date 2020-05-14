@@ -66,8 +66,11 @@ router.patch('/:id', (req, res) => {
 
 //delete a list of task
 router.delete('/:id', (req, res) => {
+  console.log('task delete');
   verifyToken(req, res);
+  console.log('verified token');
   Task.findByIdAndDelete({ _id: req.params.id }).then((deletedTask) => {
+    console.log('res sended');
     res.send(deletedTask);
   });
 });
