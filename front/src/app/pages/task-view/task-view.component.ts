@@ -12,7 +12,7 @@ import { Task } from 'src/app/models/task.model';
 export class TaskViewComponent implements OnInit {
 
   constructor(private tasklistService: TasklistService, private route: ActivatedRoute) { }
-  lists: any;
+
   tasks: Task;
 
   ngOnInit(): void {
@@ -21,10 +21,6 @@ export class TaskViewComponent implements OnInit {
       this.tasklistService.getTasks(params.listId).subscribe((tasks: any) => {
         this.tasks = tasks;
       })
-    })
-
-    this.tasklistService.getLists().subscribe((lists: any) => {
-      this.lists = lists;
     })
   }
 

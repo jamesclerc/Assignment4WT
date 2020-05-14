@@ -1,16 +1,31 @@
 <div class="centered-content">
-    <div class="modal-box">
+  <div class="modal-box">
+      <div class="notification is-danger" style={{showpopup}}>
+        <button class="delete" (click)="hidepopup()"></button>
+          Please fill out all the fields
+      </div>
       <h1 class="title">
         Create a new task
       </h1>
-  
-      <input #taskTitleInput class="input has-background-light is-medium" type="text" placeholder="Enter task name...">
+      <label class="label" for="title">Title</label>
+      <input #taskTitleInput class="input has-background-light is-medium" name="title" type="text" placeholder="Enter task name...">
+      <br><br>
+      <label class="label" for="desc">Description</label>
+      <textarea #taskDescTxtarea class="textarea has-background-light is-medium" name="desc" type="text" placeholder="Enter task description ..."></textarea>
+      <br><br>
+      <label class="label" for="assigned">Assign task to</label>
+      <select #taskUserSelect class="select has-background-light is-medium" name="assigned">
+        <option class="option" *ngFor="let user of users" [value]="user._id">
+          {{user.email}}
+        </option>
+      </select>
+      <br><br>
+      <label class="label" for="date">Date</label>
+      <input #taskDateInput type="date" name="date" class="input" min={{datemin}} required>
       <br><br>
       <div class="buttons is-right">
         <button class="button is-medium" routerLink="/">Cancel</button>
-        <button class="button is-primary has-text-white is-medium" (click)="createTask(taskTitleInput.value)">Create</button>
+        <button class="button is-primary has-text-white is-medium" (click)="createTask(taskTitleInput.value, taskDescTxtarea.value, taskUserSelect.value, taskDateInput.value)">Create</button>
       </div>
-  
-      
     </div>
   </div>

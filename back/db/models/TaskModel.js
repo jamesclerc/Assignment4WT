@@ -7,12 +7,21 @@ const Task = new mongoose.Schema({
         minlength: 1,
         trim: true
     },
+    desc: {
+        type: String,
+        required: true,
+        minlength: 1,
+    },
     completed: {
         type: Boolean,
         default: false
     },
-    _listId: {
+    userId: {
         type: mongoose.Types.ObjectId,
+        required: true
+    },
+    completeBefore: {
+        type: Date,
         required: true
     }
 });

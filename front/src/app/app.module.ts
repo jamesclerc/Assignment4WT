@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { TaskViewComponent } from './pages/task-view/task-view.component';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NewlistComponent } from './pages/newlist/newlist.component';
 import { NewtaskComponent } from './pages/newtask/newtask.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -17,7 +16,6 @@ import { LoginComponent } from './pages/login/login.component';
   declarations: [
     AppComponent,
     TaskViewComponent,
-    NewlistComponent,
     NewtaskComponent,
     RegisterComponent,
     LoginComponent,

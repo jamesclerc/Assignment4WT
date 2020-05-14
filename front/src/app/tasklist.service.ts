@@ -9,23 +9,20 @@ export class TasklistService {
 
   constructor(private webRequestService: WebRequestService) { }
 
-  createList(title: string){
-    return this.webRequestService.post("lists", {title})
+  createTask(title: string, desc: string, userId: string, date: string){
+    console.log(date)
+    return this.webRequestService.post(`tasks`, { title, userId, desc, date});
   }
 
-  getLists(){
-    return this.webRequestService.get("lists");
+  getTasks(userId: string){
+    return this.webRequestService.get(`tasks`);
   }
 
-  createTask(title: string, listId: string){
-    return this.webRequestService.post(`lists/${listId}/tasks`, { title });
-  }
-
-  getTasks(listId: string){
-    return this.webRequestService.get(`lists/${listId}/tasks`);
+  getUsers(){
+    return this.webRequestService.get("user");
   }
 
   completeTask(task: Task){
-    return this.webRequestService.patch(`lists/${task._listId}/tasks/${task._id}`, {"completed": !task.completed});
+    return this.webRequestService.patch(`tasks/${task._id}`, {"completed": !task.completed});
   }
 }

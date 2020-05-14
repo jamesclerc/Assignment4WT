@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
       if (res.token != undefined) {
         // we have logged in successfully
         localStorage.setItem('token', res.token);
-        this.router.navigate(['/lists']);
+        this.router.navigate(['/tasks']);
       }
       console.log(res);
     });
