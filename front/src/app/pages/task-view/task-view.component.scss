@@ -111,6 +111,16 @@
     .task-text {
         display: flex;
         flex-grow: 1;
+        width: 300px;
+    }
+
+    .task-title{
+        width: 300px;
+        overflow: hidden;
+    }
+
+    .task-date{
+        margin-left: 20px;
     }
 
     .task-buttons {

@@ -38,4 +38,10 @@ export class TaskViewComponent implements OnInit {
       console.log(status);
     });
   }
+
+  test(date: string){
+    let x = new Date(date.substring(0,10)).getTime()
+    let datenow = new Date().getTime();
+    return ("day left " + Math.round(Math.abs((datenow - x) / 86400000)));
+  }
 }

@@ -1,13 +1,20 @@
 <div class="centered-content">
   <div class="task-manager-container">
-    <div class="sidebar has-background-white"></div>
+    <div class="sidebar has-background-white">
+
+    </div>
     <div class="task-list-container has-background-light">
       <h1 class="title has-text-primary">
         Tasks
       </h1>
       <div class="task" *ngFor="let task of tasks" (click)="onTaskCliked(task)" [ngClass]="{ 'completed': task.completed }">
         <div class="task-text">
-          <p>{{ task.title }}</p>
+          <div class="task-title">
+            <p>{{ task.title }}</p>
+          </div>
+          <div class="task-date">
+            <p>{{ test(task.completeBefore) }}</p>
+          </div>
         </div>
         <div class="task-buttons">
 
