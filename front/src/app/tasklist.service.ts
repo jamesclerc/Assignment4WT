@@ -10,6 +10,7 @@ import { Task } from './models/task.model';
 export class TasklistService {
   constructor(private webRequestService: WebRequestService) {}
 
+  //create a task using all the fileds
   createTask(
     title: string,
     desc: string,
@@ -27,22 +28,27 @@ export class TasklistService {
     });
   }
 
-  getTasks(userId: string) {
+  //get the tasks
+  getTasks() {
     return this.webRequestService.get(`tasks`);
   }
 
+  //get a task by id
   getTasksById(taskId: string) {
     return this.webRequestService.get(`tasks/${taskId}`);
   }
 
+  //get all the users
   getUsers() {
     return this.webRequestService.get('user');
   }
 
+  //get one user
   getUser(userId: string) {
     return this.webRequestService.get(`user/${userId}`);
   }
 
+  //update a task
   updateTask(
     title: string,
     desc: string,
@@ -58,14 +64,15 @@ export class TasklistService {
     });
   }
 
+  //set complete boolean to !complete
   completeTask(task: Task) {
     return this.webRequestService.patch(`tasks/${task._id}`, {
       completed: !task.completed,
     });
   }
 
-  deleteTask(task: Task) {
-    console.log('delete button');
-    return this.webRequestService.delete(`tasks/${task._id}`);
+  //delete a task
+  deleteTask(taskId: string) {
+    return this.webRequestService.delete(`tasks/${taskId}`);
   }
 }

@@ -33,6 +33,7 @@ export class ViewTaskComponent implements OnInit {
       this.taskId = params.taskId;
     });
 
+    //get a task by id and fill all the fields
     this.tasklistService.getTasksById(this.taskId).subscribe((task: Task) => {
       this.task = task;
       this.taskDate = this.task.completeBefore.toString().substring(0, 10);

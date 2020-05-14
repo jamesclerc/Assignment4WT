@@ -10,6 +10,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { TaskViewComponent } from './pages/task-view/task-view.component';
 import { ViewTaskComponent } from './pages/view-task/view-task.component';
 
+// here are all the road defined, the authguard prevent the user from accessing a page without being authentificated
 const routes: Routes = [
   {
     path: '',

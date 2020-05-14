@@ -11,6 +11,7 @@ export class WebRequestService {
     this.ROOT_URL = "http://localhost:8080";
   }
 
+  //webrequestservice is the service that allow us to do the request on the serve GET POST PATCH DELETE
   get(uri: string) {
     return this.http.get(`${this.ROOT_URL}/${uri}`);
   }

@@ -5,7 +5,7 @@ import {AuthService} from './auth.service'
 @Injectable({
   providedIn: 'root'
 })
-
+//auth guard prevent the user to access some route the canActivate return true if the user is logged In
 export class AuthGuardService implements CanActivate {
 
   constructor(private authService : AuthService, private route : Router) { }

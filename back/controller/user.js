@@ -47,7 +47,7 @@ function verifyToken(req, res) {
   return true;
 }
 
-//return an array of all the list of task
+//return all the users
 router.get('/', async (req, res) => {
   isVerified = verifyToken(req, res);
   if (!isVerified) return;
@@ -59,6 +59,8 @@ router.get('/', async (req, res) => {
   }
 });
 
+
+//get a user using the id
 router.get('/:id', async (req, res) => {
   isVerified = verifyToken(req, res);
   if (!isVerified) return;
@@ -70,6 +72,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+//used to notify a user because the task are not done
 router.get('/notify', async (req, res) => {
   isVerified = verifyToken(req, res);
   if (!isVerified) return;
@@ -109,7 +112,7 @@ router.post('/register', async (req, res) => {
   let user = new User(userData);
   user.save((error, registeredUser) => {
     if (error) {
-      console.log(error);
+      res.sendStatus(400)
     } else {
       let payload = { subject: registeredUser._id };
       let token = jwt.sign(payload, 'secretKey');
@@ -118,27 +121,23 @@ router.post('/register', async (req, res) => {
   });
 });
 
+
+//login a user
 router.post('/login', async (req, res) => {
   let userData = req.body;
 
   try {
     user = await User.findOne({ email: userData.email });
-    console.log(user);
     if (!user) {
-      console.log('401');
       res.status(401).send('Invalid Email');
     } else if (user.password !== userData.password) {
-      console.log(401);
       res.status(401).send('Invalid password');
     } else {
       let payload = { subject: user._id };
       let token = jwt.sign(payload, 'secretKey');
-      console.log('200');
-      console.log(token);
       res.status(200).send({ token });
     }
   } catch (e) {
-    console.log(e);
   }
 });
 

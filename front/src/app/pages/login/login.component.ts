@@ -1,19 +1,3 @@
-// import { Component, OnInit } from '@angular/core';
-
-// @Component({
-//   selector: 'app-login',
-//   templateUrl: './login.component.html',
-//   styleUrls: ['./login.component.scss']
-// })
-// export class LoginComponent implements OnInit {
-
-//   constructor() { }
-
-//   ngOnInit(): void {
-//   }
-
-// }
-
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -30,6 +14,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {}
 
+  //login the user by calling the backend endpoint /login set the token inside the local storage
   onLoginButtonClicked(email: string, password: string) {
     this.authService.loginUser({ email, password }).subscribe((res) => {
       if (res.token != undefined) {
@@ -37,7 +22,6 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', res.token);
         this.router.navigate(['/tasks']);
       }
-      console.log(res);
     });
   }
 }

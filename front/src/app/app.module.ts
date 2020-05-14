@@ -14,6 +14,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { EdittaskComponent } from './pages/edittask/edittask.component';
 import { ViewTaskComponent } from './pages/view-task/view-task.component';
 
+//all the component and service are defined here
 @NgModule({
   declarations: [
     AppComponent,

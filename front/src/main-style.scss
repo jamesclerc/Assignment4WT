@@ -1,5 +1,7 @@
+//import the font for the project
 @import url('https://fonts.googleapis.com/css?family=Lato:400,700|Nunito:400,700');
 
+//custom color for the project (using the global value from scss)
 $turquoise: #44ddd0;
 $green: #27d7a1;
 $light-green: #45f69e; 
@@ -7,22 +9,15 @@ $dark-green: rgb(0, 100, 80);
 
 $light: #f8f8f8;
 
-
-// Update Bulma's global variables
 $family-sans-serif: "Nunito", sans-serif;
 $primary: $green;
 
 $link: $turquoise;
 
-
-// Update some of Bulma's component variables
-
 $control-border-width: 2px;
 $input-border-color: transparent;
 $input-shadow: none;
 
-
-// Set custom global styles (will be applied to whole app)
 
 html {
     background: linear-gradient(to right top, $turquoise, $green);
@@ -31,7 +26,7 @@ html {
 html, body {
     height: 100%;
 }
-
+//center the content inside this div
 .centered-content {
     display: flex;
     justify-content: center;
@@ -40,6 +35,7 @@ html, body {
     height: 100%;
 }
 
+//modal box sizing and style
 .modal-box {
     min-height: 200px;
     width: 100%;
@@ -49,6 +45,7 @@ html, body {
     padding: 35px;
 }
 
+//set the  title font and size
 .title {
     font-family: 'Lato';
     font-size: 24px;
@@ -56,12 +53,12 @@ html, body {
     letter-spacing: 2px;
 }
 
+
+//white box of a certain size (350px) width, fit-content height color white and centered padding
 .white-box {
     padding: 35px;
     background: white;
     border-radius: 5px;
-
     width: 350px;
-    max-width: 350px;
-    
+    max-width: 350px;    
 }

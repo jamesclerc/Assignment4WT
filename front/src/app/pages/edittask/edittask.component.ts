@@ -30,7 +30,7 @@ export class EdittaskComponent implements OnInit {
         this.taskId = params.taskId;
       }
     )
-
+    // retrieve the users for the select option
     this.tasklistService.getUsers().subscribe((user: User) => {
       this.users = user;
     })
@@ -43,22 +43,24 @@ export class EdittaskComponent implements OnInit {
       this.taskUserId = this.task.userId
     })
     
-
+    //convert date for the input value
     this.datemin = new Date().toJSON().split('T')[0];
+    //init of the popup
     this.showpopup = "display: none;"
   }
 
+  //update a task by calling the patch updateTask if not, display the popup
   updateTask(title: string, desc: string, userId: string, date: string) {
     if (date && title && desc && userId) {
       this.tasklistService.updateTask(title, desc, userId, date, this.taskId).subscribe((newtask: Task) => {
         this.router.navigate(["../../"], {relativeTo: this.route})
       })
     } else {
-      
       this.showpopup = "display: block";
     }
   }
 
+  //on click on the cross btn of the popup, close it
   hidepopup(){
     this.showpopup = "display: none";
   }

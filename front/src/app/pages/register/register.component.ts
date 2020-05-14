@@ -14,6 +14,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {}
 
+  //register a user calling the endpoint /register set the token to the local storage and authomaticly login the user
   onRegisterClicked(email: string, password: string) {
     this.authService.registerUser({ email, password }).subscribe((res) => {
       localStorage.setItem('token', res.token);

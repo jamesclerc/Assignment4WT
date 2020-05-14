@@ -46,6 +46,10 @@
 
 }
 
+.container-task {
+    overflow-y: auto;
+}
+
 .list-menu {
     display: flex;
     flex-direction: column;
@@ -80,6 +84,7 @@
     padding: 15px 20px;
     border-radius: 5px;
     margin-top: 10px;
+    overflow-y: hidden;
 
     align-items: center;
     

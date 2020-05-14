@@ -4,61 +4,63 @@
       <h1 class="title has-text-primary">
         Tasks
       </h1>
-      <div
-        class="task"
-        *ngFor="let task of tasks"
-        (click)="onTaskCliked(task)"
-        [ngClass]="{ completed: task.completed }"
-      >
-        <div class="icon">
-          <i
-            class="fas fa-exclamation-triangle"
-            [ngStyle]="{ color: getIconColor(task) }"
-          ></i>
-        </div>
-        <div class="task-text">
-          <div class="task-title">
-            <p>{{ task.title }}</p>
+      <div class="container-task">
+        <div
+          class="task"
+          *ngFor="let task of tasks"
+          (click)="onTaskCliked(task)"
+          [ngClass]="{ completed: task.completed }"
+        >
+          <div class="icon">
+            <i
+              class="fas fa-exclamation-triangle"
+              [ngStyle]="{ color: getIconColor(task) }"
+            ></i>
           </div>
-          <div class="task-date">
-            <p>{{ test(task.completeBefore) }}</p>
+          <div class="task-text">
+            <div class="task-title">
+              <p>{{ task.title }}</p>
+            </div>
+            <div class="task-date">
+              <p>{{ dayLeft(task.completeBefore) }}</p>
+            </div>
           </div>
-        </div>
-        <div class="task-buttons">
-          <button
-            class="button"
-            [routerLink]="['/tasks', 'edittask', task._id]"
-          >
-            <div class="icon">
-              <i class="fas fa-edit"></i>
-            </div>
-          </button>
-          <button
-            class="button"
-            [routerLink]="['/tasks', 'view-task', task._id]"
-          >
-            <div class="icon">
-              <i class="fas fa-info"></i>
-            </div>
-          </button>
+          <div class="task-buttons">
+            <button
+              class="button"
+              [routerLink]="['/tasks', 'edittask', task._id]"
+            >
+              <div class="icon">
+                <i class="fas fa-edit"></i>
+              </div>
+            </button>
+            <button
+              class="button"
+              [routerLink]="['/tasks', 'view-task', task._id]"
+            >
+              <div class="icon">
+                <i class="fas fa-info"></i>
+              </div>
+            </button>
 
-          <button
-            class="button is-danger"
-            (click)="onButtonDeleteClicked(task._id)"
-            style="margin-left: 10px;"
-          >
-            <div class="icon">
-              <i class="fas fa-trash"></i>
-            </div>
-          </button>
-        </div>
+            <button
+              class="button is-danger"
+              (click)="onButtonDeleteClicked(task._id)"
+              style="margin-left: 10px;"
+            >
+              <div class="icon">
+                <i class="fas fa-trash"></i>
+              </div>
+            </button>
+          </div>
+          </div>
       </div>
       <button
-        routerLink="./newtask"
-        class="circle-add-button button is-primary"
+      routerLink="./newtask"
+      class="circle-add-button button is-primary"
       >
-        +
-      </button>
+      +
+    </button>
     </div>
   </div>
 </div>

@@ -23,9 +23,11 @@ export class NewtaskComponent implements OnInit {
   priorities: Object;
 
   ngOnInit(): void {
+    // retrieve the users for the select option
     this.tasklistService.getUsers().subscribe((user: User) => {
       this.users = user;
     });
+    //set the priorities
     this.priorities = [
       { id: 1, title: 'Trivial' },
       { id: 2, title: 'Important' },
@@ -35,6 +37,7 @@ export class NewtaskComponent implements OnInit {
     this.showpopup = 'display: none;';
   }
 
+  //create a task with all the fields if not all the fields are filled, display a popup
   createTask(
     title: string,
     desc: string,
