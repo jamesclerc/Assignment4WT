@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+//model of a task on the database
 const Task = new mongoose.Schema({
   title: {
     type: String,

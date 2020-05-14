@@ -2,6 +2,7 @@ var router = require('express').Router();
 const Task = require('../db/models/TaskModel');
 const jwt = require('jsonwebtoken');
 
+// this function verify the token if it's a real token and get the payload inside the token for the next function
 function verifyToken(req, res) {
   if (!req.headers || !req.headers.authorization) {
     res.status(401).send('Unauthorized request');
@@ -60,6 +61,7 @@ router.post('/', async (req, res) => {
   }
 });
 
+// return the task asked only if he's connected and got a good token
 router.get('/:id', async (req, res) => {
   isVerified = verifyToken(req, res);
   if (!isVerified) return;
