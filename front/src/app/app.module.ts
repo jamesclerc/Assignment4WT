@@ -11,6 +11,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NewtaskComponent } from './pages/newtask/newtask.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
+import { EdittaskComponent } from './pages/edittask/edittask.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { LoginComponent } from './pages/login/login.component';
     NewtaskComponent,
     RegisterComponent,
     LoginComponent,
+    EdittaskComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [

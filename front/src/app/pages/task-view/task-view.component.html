@@ -5,23 +5,24 @@
       <h1 class="title has-text-primary">
         Tasks
       </h1>
-      <div class="task-list-container-task">
-        <div *ngFor="let task of tasks">
-          <div
-            class="task"
-            (click)="onTaskCliked(task)"
-            [ngClass]="{ completed: task.completed }"
-          >
-            <div class="task-text">
-              <p>{{ task.title }}</p>
-            </div>
-          </div>
+      <div class="task" *ngFor="let task of tasks" (click)="onTaskCliked(task)" [ngClass]="{ 'completed': task.completed }">
+        <div class="task-text">
+          <p>{{ task.title }}</p>
+        </div>
+        <div class="task-buttons">
 
-          <div>
-            <button class="button" (click)="onButtonDeleteClicked(task)">
-              Delete
-            </button>
-          </div>
+          <button class="button" [routerLink]="['/tasks', 'edittask', task._id]">
+            <div class="icon">
+              <i class="fas fa-edit"></i>
+            </div>
+          </button>
+
+          <button class="button is-danger" (click)="onButtonDeleteClicked(task._id)" style="margin-left: 10px;">
+            <div class="icon">
+              <i class="fas fa-trash"></i>
+            </div>
+          </button>
+
         </div>
       </div>
       <button

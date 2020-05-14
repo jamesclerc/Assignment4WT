@@ -59,6 +59,19 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.get('/:id', async(req, res) => {
+  isVerified = verifyToken(req, res);
+  if (!isVerified) return;
+  console.log(req.params.id)
+  try{
+    let task = await Task.findById(req.params.id)
+    console.log(task)
+    res.send(task)
+  } catch(err) {
+    res.status(401).send('Unauthorized request');
+  }
+})
+
 //update a list
 router.patch('/:id', (req, res) => {
   isVerified = verifyToken(req, res);
