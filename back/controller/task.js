@@ -3,40 +3,48 @@ const Task = require('../db/models/TaskModel');
 const jwt = require('jsonwebtoken');
 
 function verifyToken(req, res) {
-  if (!req.headers.authorization) {
+  if (!req.headers || !req.headers.authorization) {
     res.status(401).send('Unauthorized request');
+    return false;
   }
   let token = req.headers.authorization.split(' ')[1];
   if (token === 'null') {
     res.status(401).send('Unauthorized request');
+    return false;
   }
   try {
     var payload = jwt.verify(token, 'secretKey');
   } catch (err) {
+    console.log("Payload didn't get verify");
     res.status(401).send('Unauthorized request');
+    return false;
   }
   if (!payload) {
     res.status(401).send('Unauthorized request');
+    return false;
   }
   req.userId = payload.subject;
+  return true;
 }
 
 //return an array of all the list of task
 router.get('/', async (req, res) => {
-  verifyToken(req, res);
+  isVerified = verifyToken(req, res);
+  if (!isVerified) return;
   try {
     let task = await Task.find({ userId: req.userId }).sort('completeBefore');
     console.log(task);
     res.send(task);
   } catch (err) {
-    res.status.send('Unauthorized request');
+    res.status(401).send('Unauthorized request');
   }
 });
 //5ebc6cf7c578b427db464d85
 //used to create a task list information ll be passed by the req.body
 //save the list to the db
 router.post('/', async (req, res) => {
-  verifyToken(req, res);
+  isVerified = verifyToken(req, res);
+  if (!isVerified) return;
   let newTask = new Task({
     title: req.body.title,
     desc: req.body.desc,
@@ -53,7 +61,8 @@ router.post('/', async (req, res) => {
 
 //update a list
 router.patch('/:id', (req, res) => {
-  verifyToken(req, res);
+  isVerified = verifyToken(req, res);
+  if (!isVerified) return;
   Task.findByIdAndUpdate(
     { _id: req.params.id },
     {
@@ -67,7 +76,8 @@ router.patch('/:id', (req, res) => {
 //delete a list of task
 router.delete('/:id', (req, res) => {
   console.log('task delete');
-  verifyToken(req, res);
+  isVerified = verifyToken(req, res);
+  if (!isVerified) return;
   console.log('verified token');
   Task.findByIdAndDelete({ _id: req.params.id }).then((deletedTask) => {
     console.log('res sended');

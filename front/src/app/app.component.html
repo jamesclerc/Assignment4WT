@@ -1,1 +1,36 @@
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" routerLink="/" routerLinkActive="active">
+        Home
+      </a>
+    </div>
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a
+            class="button is-primary"
+            *ngIf="!_authService.loggedIn()"
+            routerLink="/register"
+            routerLinkActive="active"
+            ><strong>Register</strong></a
+          >
+          <a
+            class="button is-light"
+            *ngIf="!_authService.loggedIn()"
+            routerLink="/login"
+            routerLinkActive="active"
+            >Login</a
+          >
+          <a
+            class="button is-light"
+            *ngIf="_authService.loggedIn()"
+            (click)="_authService.logout()"
+            >Logout</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
 <router-outlet></router-outlet>
