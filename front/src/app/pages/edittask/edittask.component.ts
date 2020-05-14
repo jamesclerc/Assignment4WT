@@ -19,7 +19,10 @@ export class EdittaskComponent implements OnInit {
   showpopup: string;
   task: Task;
   taskId: string;
-  dateValue: string;
+  taskDate: string;
+  taskTitle: string;
+  taskDesc: string;
+  taskUserId: string;
 
   ngOnInit(): void {
     this.route.params.subscribe(
@@ -34,7 +37,10 @@ export class EdittaskComponent implements OnInit {
 
     this.tasklistService.getTasksById(this.taskId).subscribe((task: Task) => {
       this.task = task
-      this.dateValue = this.task.completeBefore.toString().substring(0,10)
+      this.taskDate = this.task.completeBefore.toString().substring(0,10)
+      this.taskTitle = this.task.title;
+      this.taskDesc = this.task.desc;
+      this.taskUserId = this.task.userId
     })
     
 

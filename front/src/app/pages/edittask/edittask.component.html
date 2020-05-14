@@ -8,20 +8,20 @@
         Create a new task
       </h1>
       <label class="label" for="title">Title</label>
-      <input #taskTitleInput class="input has-background-light is-medium" name="title" type="text" value={{task.title}}>
+      <input #taskTitleInput class="input has-background-light is-medium" name="title" type="text" value={{taskTitle}}>
       <br><br>
       <label class="label" for="desc">Description</label>
-      <textarea #taskDescTxtarea class="textarea has-background-light is-medium" name="desc" type="text" placeholder="Enter task description ..." value={{task.desc}}></textarea>
+      <textarea #taskDescTxtarea class="textarea has-background-light is-medium" name="desc" type="text" placeholder="Enter task description ..." value={{taskDesc}}></textarea>
       <br><br>
       <label class="label" for="assigned">Assign task to</label>
       <select #taskUserSelect class="select has-background-light is-medium" name="assigned">
-        <option class="option" *ngFor="let user of users" [selected]="task.userId == user._id" [value]="user._id">
+        <option class="option" *ngFor="let user of users" [selected]="taskUserId == user._id" [value]="user._id">
           {{user.email}}
         </option>
       </select>
       <br><br>
       <label class="label" for="date">Date</label>
-      <input #taskDateInput type="date" name="date" class="input" value={{dateValue}} required>
+      <input #taskDateInput type="date" name="date" class="input" value={{taskDate}} required>
       <br><br>
       <div class="buttons is-right">
         <button class="button is-medium" routerLink="/">Cancel</button>
