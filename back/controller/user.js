@@ -7,6 +7,7 @@ const nodemailer = require('nodemailer');
 
 let testAccount;
 let transporter;
+//permit to creat an account to send email to users, used on Notify
 nodemailer.createTestAccount((err, testaccount) => {
   testAccount = testaccount;
   transporter = nodemailer.createTransport({
@@ -59,8 +60,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-
-//get a user using the id
+//return the id
 router.get('/:id', async (req, res) => {
   isVerified = verifyToken(req, res);
   if (!isVerified) return;
@@ -72,7 +72,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-//used to notify a user because the task are not done
+// notify the user of all his uncompleted today's task
 router.get('/notify', async (req, res) => {
   isVerified = verifyToken(req, res);
   if (!isVerified) return;
@@ -121,8 +121,7 @@ router.post('/register', async (req, res) => {
   });
 });
 
-
-//login a user
+//check password and return a token if the login is valid
 router.post('/login', async (req, res) => {
   let userData = req.body;
 
