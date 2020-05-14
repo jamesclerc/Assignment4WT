@@ -39,6 +39,17 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/:id', async (req, res) => {
+  isVerified = verifyToken(req, res);
+  if (!isVerified) return;
+  try {
+    const user = await User.findById(req.params.id);
+    res.send(user);
+  } catch (err) {
+    res.status.send('Unauthorized request');
+  }
+});
+
 //register user
 router.post('/register', async (req, res) => {
   let userData = req.body;

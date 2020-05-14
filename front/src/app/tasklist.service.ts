@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+
 import { WebRequestService } from './web-request.service';
+
 import { Task } from './models/task.model';
 
 @Injectable({
@@ -17,16 +19,31 @@ export class TasklistService {
     return this.webRequestService.get(`tasks`);
   }
 
-  getTasksById(taskId: string){
-    return this.webRequestService.get(`tasks/${taskId}`)
+  getTasksById(taskId: string) {
+    return this.webRequestService.get(`tasks/${taskId}`);
   }
 
   getUsers() {
     return this.webRequestService.get('user');
   }
 
-  updateTask(title: string, desc: string, userId: string, date: string, taskId: string){
-    return this.webRequestService.patch(`tasks/${taskId}`, {title, desc, userId, date})
+  getUser(userId: string) {
+    return this.webRequestService.get(`user/${userId}`);
+  }
+
+  updateTask(
+    title: string,
+    desc: string,
+    userId: string,
+    date: string,
+    taskId: string
+  ) {
+    return this.webRequestService.patch(`tasks/${taskId}`, {
+      title,
+      desc,
+      userId,
+      date,
+    });
   }
 
   completeTask(task: Task) {

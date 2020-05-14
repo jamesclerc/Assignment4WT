@@ -12,6 +12,7 @@ import { NewtaskComponent } from './pages/newtask/newtask.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { EdittaskComponent } from './pages/edittask/edittask.component';
+import { ViewTaskComponent } from './pages/view-task/view-task.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { EdittaskComponent } from './pages/edittask/edittask.component';
     RegisterComponent,
     LoginComponent,
     EdittaskComponent,
+    ViewTaskComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [
