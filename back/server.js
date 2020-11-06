@@ -22,7 +22,7 @@ const mongodb_data = {
 
 //connect to the DB
 mongoose.connect(
-  `mongodb+srv://${mongodb_data.user}:${mongodb_data.password}@${mongodb_data.url}/${mongodb_data.database}?retryWrites=true&w=majority`,
+  `mongodb://${mongodb_data.user}:${mongodb_data.password}@${mongodb_data.url}/${mongodb_data.database}?retryWrites=true&w=majority`,
   // `mongodb+srv://admin:admin@cluster0-khrx6.mongodb.net/test?retryWrites=true&w=majority`,
   {
     useNewUrlParser: true,

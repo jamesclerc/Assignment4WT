@@ -1,0 +1,40 @@
+version: "3.8"
+services:
+  front:
+    build: ./front/
+    ports:
+      - "4200:4200"
+    depends_on:
+      - back
+  back:
+    build: ./back/
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongodb
+    env_file:
+      - .env
+    environment:
+      MONGODB_USER: ${MONGODB_USER}
+      MONGODB_PASSWORD: ${MONGODB_PASSWORD}
+      MONGODB_DATABASE: ${MONGODB_DATABASE}
+      MONGODB_URL: mongodb
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    hostname: mongodb
+    volumes:
+      - ./.docker/mongodb/mongod.conf:/etc/mongod.conf
+      - ./.docker/mongodb/initdb.d/:/docker-entrypoint-initdb.d/
+      - ./.docker/mongodb/data/db/:/data/db/
+      - ./.docker/mongodb/data/log/:/var/log/mongodb/
+    env_file:
+      - .env
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${ROOT_MONGODB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${ROOT_MONGODB_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGODB_DATABASE}
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
