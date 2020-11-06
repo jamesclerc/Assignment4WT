@@ -13,9 +13,17 @@ var path = require('path');
 //got a cors error fixed now
 var cors = require('cors');
 
+const mongodb_data = {
+  user: process.env.MONGODB_USER,
+  password: process.env.MONGODB_PASSWORD,
+  url: process.env.MONGODB_URL,
+  database: process.env.MONGODB_DATABASE,
+};
+
 //connect to the DB
 mongoose.connect(
-  'mongodb+srv://admin:admin@cluster0-khrx6.mongodb.net/test?retryWrites=true&w=majority',
+  `mongodb+srv://${mongodb_data.user}:${mongodb_data.password}@${mongodb_data.url}/${mongodb_data.database}?retryWrites=true&w=majority`,
+  // `mongodb+srv://admin:admin@cluster0-khrx6.mongodb.net/test?retryWrites=true&w=majority`,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
